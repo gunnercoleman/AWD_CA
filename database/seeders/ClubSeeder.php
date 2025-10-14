@@ -38,14 +38,16 @@ class ClubSeeder extends Seeder{
                 'name' => 'Tottenham',
                 'position' => 16,
                 'description' => 'Below average team in London',
-                'image' => 'intermilan.jpg'
+                'image' => 'tottenham.jpg'
             ],
-                        [
+
+            [
                 'name' => 'Barcelona',
                 'position' => 2,
                 'description' => 'Best club in Spain',
-                'image' => 'intermilan.jpg'
+                'image' => 'barcelona.jpg'
             ],
+
         ]);
     }
 }
