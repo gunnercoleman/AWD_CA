@@ -21,7 +21,7 @@ class ClubController extends Controller
      */
     public function create()
     {
-        //
+        return view('clubs.create');
     }
 
     /**
@@ -37,7 +37,7 @@ class ClubController extends Controller
      */
     public function show(Club $club)
     {
-        //
+        return view('clubs.show')->with('club', $club);
     }
 
     /**

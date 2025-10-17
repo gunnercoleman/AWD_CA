@@ -13,10 +13,12 @@
 
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                         @foreach ($clubs as $club)
+                        <a href="{{ route('clubs.show', $club) }}">
                             <x-club-card
                                 :name="$club->name"
                                 :image="$club->image"
                                 :description="$club->description"
+                                :position="$club->position"
                             />
                         @endforeach
                     </div>

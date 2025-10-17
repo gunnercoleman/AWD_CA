@@ -31,6 +31,6 @@ Route::middleware('auth')->group(function () {
 
 });
 
-//tetst
+
 
 require __DIR__.'/auth.php';
