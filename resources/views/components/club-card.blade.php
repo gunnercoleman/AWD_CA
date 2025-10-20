@@ -10,7 +10,7 @@
 
     <img src="{{asset('images/clubs/' . $image)}}">
 
-    <h3 class="text-lg">{{$description}}</h3>
+
 </div>
 
 

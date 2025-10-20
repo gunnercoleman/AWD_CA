@@ -5,6 +5,10 @@
         </h2>
     </x-slot>
 
+    <x-alert-success>
+        {{ session('success') }}
+    </x-alert-success>
+
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
@@ -19,9 +23,12 @@
                                 :image="$club->image"
                                 :description="$club->description"
                                 :position="$club->position"
+                                :club="$club"
                             />
                         @endforeach
                     </div>
+
+
                 </div>
             </div>
         </div>

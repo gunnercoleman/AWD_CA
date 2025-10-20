@@ -1,9 +1,11 @@
 <div>
     <x-app-layout>
     <x-slot name="header">
+
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('All Clubs') }}
         </h2>
+
     </x-slot>
 
     <div class="py-12">
@@ -18,7 +20,23 @@
                             :description="$club->description"
                             :position="$club->position"
                         />
+
+                <div class="mt-4 flex space-x-2">
+
+                    <a href="{{ route('clubs.edit', $club)}}" class="text-gray-600 bg-orange-300 hover:bg-orange-700 font-bold py-2 px-4 rounded">
+                        Edit
+                    </a>
+
+                    <form action="{{ route('clubs.destroy', $club) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this club?');">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="text-gray-600 bg-red-300 hover:bg-red-700 font-bold py-2 px-4 rounded">
+                            Delete
+                        </button>
+                    </form>
                 </div>
+
+
             </div>
         </div>
     </div>

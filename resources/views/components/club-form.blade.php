@@ -1,6 +1,6 @@
 <div>
 
-    @props(['action', 'method'])
+    @props(['action', 'method', 'club'])
 
     <form action="{{ $action }}" method="POST" enctype="multipart/form-data">
         @csrf
@@ -25,7 +25,7 @@
             @enderror
         </div>
 
-        <!-- Position Input f -->
+        <!-- Position Input  -->
 
         <div class="mb-4">
             <label for="position" class="block text-sm text-gray-700">Position</label>
@@ -59,7 +59,7 @@
             @enderror
         </div>
 
-        {{-- Image Upload --}}
+        <!-- Image Upload -->
         <div class="mb-4">
             <label for="image" class="block text-sm font-medium text-gray-700">Club Image</label>
             <input
@@ -74,10 +74,10 @@
             @enderror
         </div>
 
-        {{-- Preview Existing Image --}}
+        <!-- Preview Existing Image -->
         @isset($club->image)
             <div class="mb-4">
-                <img src="{{ asset($club->image) }}" alt="Club Image" class="w-24 h-32 object-cover">
+                <img src="{{ asset('images/clubs/' . $club->image) }}" alt="$club->image" class="w-24 h-32 object-cover">
             </div>
         @endisset
 

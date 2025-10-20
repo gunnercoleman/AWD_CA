@@ -8,4 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class Club extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'name',
+        'position',
+        'description',
+        'image',
+        'created_at',
+        'updated_at'
+    ];
 }

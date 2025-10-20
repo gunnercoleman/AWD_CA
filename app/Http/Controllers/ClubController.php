@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Club;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ClubController extends Controller
 {
@@ -29,7 +30,29 @@ class ClubController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'position' => 'required|integer',
+            'description' => 'required|max:500',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+
+        if($request->hasFile('image')){
+
+           $imageName = time().'.'.$request->image->extension();
+           $request->image->move(public_path('images/clubs'), $imageName);
+        }
+
+        Club::create([
+            'name' => $request->name,
+            'position' => $request->position,
+            'description' => $request->description,
+            'image' => $imageName,
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+
+        return to_route('clubs.index')->with('success', 'Club created successfully !');
     }
 
     /**
@@ -45,7 +68,7 @@ class ClubController extends Controller
      */
     public function edit(Club $club)
     {
-        //
+        return view('clubs.edit');
     }
 
     /**
