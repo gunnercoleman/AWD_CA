@@ -10,11 +10,11 @@
             <div class="max-w-7x1 mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="p-6 text-gray-900">
-                        <h3 class="font-semibold text-lg mb-4">Edit New Club:</h3>
+                        <h3 class="font-semibold text-lg mb-4">Create New Club:</h3>
 
                         <x-club-form
-                            :action="route('clubs.update')"
-                            :method="'PUT'"
+                            :action="route('clubs.store')"
+                            :method="'POST'"
                         />
                     </div>
                 </div>

@@ -1,4 +1,4 @@
-<div>
+
 
     @props(['action', 'method', 'club'])
 
@@ -19,7 +19,7 @@
                 value="{{ old('name', $club->name ?? '') }}"
                 required
                 class="mt-1 block w-full border-gray-300 rounded-md shadow-sm"
-            >
+            />
             @error('name')
                 <p class="text-sm text-red-600">{{ $message }}</p>
             @enderror
@@ -36,7 +36,7 @@
                 value="{{ old('position', $club->position ?? '') }}"
                 required
                 class="mt-1 block w-full border-gray-300 rounded-md shadow-sm"
-            >
+            />
             @error('position')
                 <p class="text-sm text-red-600">{{ $message }}</p>
             @enderror
@@ -53,7 +53,7 @@
                 value="{{ old('description', $club->description ?? '') }}"
                 required
                 class="mt-1 block w-full border-gray-300 rounded-md shadow-sm"
-            >
+            />
             @error('description')
                 <p class="text-sm text-red-600">{{ $message }}</p>
             @enderror
@@ -68,7 +68,7 @@
                 id="image"
                 {{ isset($club) ? '' : 'required' }}
                 class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
-            >
+            />
             @error('image')
                 <p class="text-sm text-red-600">{{ $message }}</p>
             @enderror
@@ -88,4 +88,4 @@
             </x-primary-button>
         </div>
     </form>
-</div>
+

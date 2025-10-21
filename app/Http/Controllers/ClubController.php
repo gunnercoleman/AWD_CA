@@ -68,7 +68,7 @@ class ClubController extends Controller
      */
     public function edit(Club $club)
     {
-        return view('clubs.edit');
+        return view('clubs.edit', compact('club'));
     }
 
     /**
@@ -76,7 +76,28 @@ class ClubController extends Controller
      */
     public function update(Request $request, Club $club)
     {
-        //
+         $request->validate([
+            'name' => 'required',
+            'position' => 'required|integer',
+            'description' => 'required|max:500',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+
+        $data = $request->only(['name', 'position', 'description']);
+
+        if($request->hasFile('image')){
+            $image = $request->file('image');
+           $imageName = time().'.'.$image->getClientOriginalExtension();
+           $image->move(public_path('images'), $imageName);
+
+           $data['image'] = $imageName;
+        }else{
+            $imageName = null;
+        }
+
+        $club->update($data);
+
+        return to_route('clubs.index')->with('success', 'Club edited successfully !');
     }
 
     /**
@@ -84,6 +105,12 @@ class ClubController extends Controller
      */
     public function destroy(Club $club)
     {
-        //
+        if ($club->image && Storage::disk('public')->exists($club->image)){
+            Storage::disk('public')->delete($club->image);
+        }
+
+        $club->delete();
+
+        return to_route('clubs.index')->with('success', 'Club deleted successfully !');
     }
 }
