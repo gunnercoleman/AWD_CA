@@ -22,6 +22,9 @@ class ClubController extends Controller
      */
     public function create()
     {
+        if (auth()->user()->role !== 'admin'){
+            return redirect()->route('clubs.index')->with('error', 'Unauthorized Access!');
+        }
         return view('clubs.create');
     }
 
@@ -88,7 +91,7 @@ class ClubController extends Controller
         if($request->hasFile('image')){
             $image = $request->file('image');
            $imageName = time().'.'.$image->getClientOriginalExtension();
-           $image->move(public_path('images'), $imageName);
+           $image->move(public_path('images/clubs'), $imageName);
 
            $data['image'] = $imageName;
         }else{

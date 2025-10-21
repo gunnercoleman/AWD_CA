@@ -21,9 +21,11 @@
                         {{ __('View All Clubs') }}
                     </x-nav-link>
 
+                @if(auth()->user()->role === 'admin')
                     <x-nav-link :href="route('clubs.create')" :active="request()->routeIs('clubs.index')">
                         {{ __('Create Club') }}
                     </x-nav-link>
+                @endif
 
                 </div>
             </div>
