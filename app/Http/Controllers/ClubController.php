@@ -6,20 +6,36 @@ use App\Models\Club;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
+/**Here is my ClubController
+
+I created it with,
+
+php artisan make:controller ClubController --resource
+
+The role of the ClubController is to handle CRUD functionality
+
+It acts as a bridge between the views and database 
+
+**/
+
+
+
 class ClubController extends Controller
 {
-    /**
-     * Display a listing of the resource. Test
-     */
+    /*
+    This function returns a view of all clubs being displayed. With all clubs being retrieved from the database and fed into it as a paramiter
+    */
+
     public function index()
     {
         $clubs = Club::all();
         return view('clubs.index', compact('clubs'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+    /*
+    This function returns a view of a form which allows the user to input info and create a club if admin.
+    */
+
     public function create()
     {
         if (auth()->user()->role !== 'admin'){
@@ -28,9 +44,10 @@ class ClubController extends Controller
         return view('clubs.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+    /*
+    This function validates the forms information and saves a new club to the database, redirecting the user to the index displaying a success message.
+    */
+
     public function store(Request $request)
     {
         $request->validate([
@@ -58,25 +75,28 @@ class ClubController extends Controller
         return to_route('clubs.index')->with('success', 'Club created successfully !');
     }
 
-    /**
-     * Display the specified resource.
-     */
+    /*
+    The show method returns a view of the single club card displaying information with club information being passed into it
+    */
+
     public function show(Club $club)
     {
         return view('clubs.show')->with('club', $club);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
+    /*
+    The edit method returns a view of the form with pre filled information of the selected club. This lets the user update information about the club. Variable $club is passed in so information about the selected club can be displayed.
+    */
+
     public function edit(Club $club)
     {
         return view('clubs.edit', compact('club'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+    /*
+    The update method validates the information inputed int the form.  It updates the club in the database and rediretcts the user to the view all clubs/index with a success message, allowing he user to save edits to an existing club
+    */
+
     public function update(Request $request, Club $club)
     {
          $request->validate([
@@ -103,9 +123,10 @@ class ClubController extends Controller
         return to_route('clubs.index')->with('success', 'Club edited successfully !');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+    /*
+    The destroy method first deletes the clubs image and and rest of information from the database and redicts to the view all page.
+    */
+    
     public function destroy(Club $club)
     {
         if ($club->image && Storage::disk('public')->exists($club->image)){
