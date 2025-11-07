@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Player;
+use App\Models\Club;
 use Illuminate\Http\Request;
 
 class PlayerController extends Controller
@@ -33,9 +34,9 @@ class PlayerController extends Controller
 
         $request->validate([
             'name' => 'required|string|max:255',
-            'age' => 'required|integer|max:50',
-            'goals' => 'required|integer|max:255',
-            'assits' => 'required|integer|max:255',
+            'age' => 'required|integer',
+            'goals' => 'required|integer',
+            'assits' => 'required|integer',
             'position' => 'required|string|max:50',
         ]);
 
@@ -47,7 +48,6 @@ class PlayerController extends Controller
             'goals' => $request->input('goals'),
             'assits' => $request->input('assits'),
             'position' => $request->input('position'),
-            'club_id' => $club->id,
         ]);
 
         return redirect()->route('clubs.show', $club)->with('Success', 'Player added successfully!');

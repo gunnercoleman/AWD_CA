@@ -20,7 +20,7 @@
                             :description="$club->description"
                             :position="$club->position"
                         />
-
+                    </a>
                 <!-- 
                 This is the part in the view where we display the all players with the associated club.
                 
@@ -57,7 +57,7 @@
                 -->
 
                 <h4 class="font-semibold text-md mt-8">Add a Player</h4>
-                <form action="{{ route('players.store') }}" method="POST" class="mt-4">
+                <form action="{{ route('clubs.players.store', $club->id) }}" method="POST" class="mt-4">
                     @csrf
                     <input type="hidden" name="club_id" value="{{ $club->id }}">
 
