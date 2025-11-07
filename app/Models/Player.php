@@ -9,9 +9,13 @@ class Player extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'name',
-        'club_id',
-        '',
-    ];
+    public function club()
+    {
+        return $this->belongsTo(Club::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

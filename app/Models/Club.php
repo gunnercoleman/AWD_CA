@@ -5,6 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+/*
+Here is my Club Model. This represents the Club table in the database, and handles the logic related to the data.
+
+It also lets us run queries, like $clubs = Club::all(); to get all clubs from the database.
+*/
+
 class Club extends Model
 {
     use HasFactory;
@@ -17,4 +23,9 @@ class Club extends Model
         'created_at',
         'updated_at'
     ];
+
+    public function players()
+    {
+        return $this->hasMany(Player::class);
+    }
 }

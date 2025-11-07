@@ -15,10 +15,10 @@ return new class extends Migration
             $table->id();
             $table->foreignId('club_id')->constrained()->onDelete('cascade');
             $table->string('name');
-            $table->integer('age')->nullable();
-            $table->integer('goals')->nullable();
-            $table->integer('assits')->nullable();
-            $table->string('position')->nullable();
+            $table->integer('age');
+            $table->integer('goals');
+            $table->integer('assits');
+            $table->string('position');
             $table->timestamps();
         });
     }
