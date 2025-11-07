@@ -26,9 +26,32 @@ class PlayerController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request, Club $club)
     {
-        //
+
+        //This valiates the data inputed into the form
+
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'age' => 'required|integer|max:50',
+            'goals' => 'required|integer|max:255',
+            'assits' => 'required|integer|max:255',
+            'position' => 'required|string|max:50',
+        ]);
+
+        //This creates a new player associated with the club passed in as a parameter
+
+        $club->players()->create([
+            'name' => $request->input('name'),
+            'age' => $request->input('age'),
+            'goals' => $request->input('goals'),
+            'assits' => $request->input('assits'),
+            'position' => $request->input('position'),
+            'club_id' => $club->id,
+        ]);
+
+        return redirect()->route('clubs.show', $club)->with('Success', 'Player added successfully!');
+
     }
 
     /**

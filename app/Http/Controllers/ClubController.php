@@ -81,6 +81,9 @@ class ClubController extends Controller
 
     public function show(Club $club)
     {
+        //This makes all players associated with the club accessible in the show view
+
+        $club->load('players');
         return view('clubs.show')->with('club', $club);
     }
 
