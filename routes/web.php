@@ -69,6 +69,15 @@ Route::middleware('auth')->group(function () {
 
 });
 
+Route::middleware('auth')->group(function () {
+
+    //Creates all necessary routes for Players, like create, edit etc.
+
+    Route::resource('players', PlayerController::class);
+
+    Route::post('clubs/{club}/players', [PlayerController::class, 'store'])->name('players.store');
+});
+
 
 
 require __DIR__.'/auth.php';
