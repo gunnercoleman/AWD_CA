@@ -21,9 +21,9 @@
                             :position="$club->position"
                         />
                     </a>
-                <!-- 
+                <!--
                 This is the part in the view where we display the all players with the associated club.
-                
+
                 This uses a foreach loop which will display every player associated with the club,
                 displaying their name, age, position, goals and assits.
 
@@ -38,9 +38,25 @@
                             <li class="bg-gray-100 p-4 rounded-lg">
                                 <p>Player Name: {{ $player->name }}</p>
                                 <p>Age: {{ $player->age }}</p>
-                                <p>Position: {{ $player->position }}</p>                                
+                                <p>Position: {{ $player->position }}</p>
                                 <p>Goals: {{ $player->goals }}</p>
-                                <p>Assits: {{ $player->assits }}</p>                                
+                                <p>Assits: {{ $player->assits }}</p>
+
+                                @if ($player->user->is(auth()->user()) || auth()->user()->role === 'admin')
+
+                                    <a href="{{ route('players.edit', $player)}}" class="bg-yellow-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded">
+                                        {{__('Edit Player')}}
+                                    </a>
+
+                                    <form method="POST" action="{{ route('players.destroy', $player)}}">
+                                        @csrf
+                                        @method('Delete')
+                                        <x-danger-button :href="route('players.destoy', $player)"
+                                                onclick="event.preventDefault(); this.closest('form').submit();">
+                                            {{__('Delete Player')}}
+                                        </x-danger-button>
+                                    </form>
+                                @endif
                             </li>
                         @endforeach
                     </ul>
@@ -52,7 +68,7 @@
                 It contains a form with fields for the player's name, age, position, goals and assits.
 
                 The form submits to the players.store route, which will handle the logic for adding the player to the database.
-                
+
                 The club_id is passed as a hidden input field to associate the new player with the correct club.
                 -->
 

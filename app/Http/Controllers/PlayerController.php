@@ -67,7 +67,10 @@ class PlayerController extends Controller
      */
     public function edit(Player $player)
     {
-        //
+        if (auth()->user()->id !== $player->user_id && auth()->user()->role !== 'admin'){
+            return redirect()->route('clubs.index')->with('error', 'You do not have permission to edit this player.');
+        }
+        return view('players.edit', compact('player'));
     }
 
     /**
@@ -75,7 +78,9 @@ class PlayerController extends Controller
      */
     public function update(Request $request, Player $player)
     {
-        //
+        $player->update($request->only(['name', 'age', 'goals', 'assits', 'position']));
+
+        return redirect()->route('clubs.show', $player->club_id)->with('success', 'Player updated successfully!');
     }
 
     /**
