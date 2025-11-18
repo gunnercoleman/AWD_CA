@@ -13,8 +13,10 @@ Here is my seeder class
 Seeders are used to populate the database with sample data to test if your web app is working correctly
 */
 
-class ClubSeeder extends Seeder{
-    public function run(): void{
+class ClubSeeder extends Seeder
+{
+    public function run(): void
+    {
 
         $currentTimestamp = Carbon::now();
 
