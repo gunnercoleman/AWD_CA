@@ -88,6 +88,8 @@ class PlayerController extends Controller
      */
     public function destroy(Player $player)
     {
-        //
+        $player->delete();
+
+        return redirect()->route('clubs.show', $player->club_id)->with('success', 'Player deleted successfully!');
     }
 }
