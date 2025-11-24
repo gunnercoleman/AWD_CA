@@ -21,11 +21,21 @@
                         {{ __('View All Clubs') }}
                     </x-nav-link>
 
+                    <x-nav-link :href="route('leagues.index')" :active="request()->routeIs('leagues.index')">
+                        {{ __('View All Leagues') }}
+                    </x-nav-link>
+
                 @if(auth()->user()->role === 'admin')
                     <x-nav-link :href="route('clubs.create')" :active="request()->routeIs('clubs.index')">
                         {{ __('Create Club') }}
                     </x-nav-link>
                 @endif
+
+                @if(auth()->user()->role === 'admin')
+                    <x-nav-link :href="route('leagues.create')" :active="request()->routeIs('leagues.index')">
+                        {{ __('Create League') }}
+                    </x-nav-link>
+                @endif                
 
                 </div>
             </div>

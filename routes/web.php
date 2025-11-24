@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\ClubController;
 use App\Http\Controllers\PlayerController;
+use App\Http\Controllers\LeagueController;
 
 /**Here is my web.php
 
@@ -78,6 +79,8 @@ Route::middleware('auth')->group(function () {
 
     Route::post('clubs/{club}/players', [PlayerController::class, 'store'])->name('clubs.players.store');
 });
+
+Route::resource('leagues', LeagueController::class)->middleware('auth');
 
 
 

@@ -2,9 +2,9 @@
 
 namespace Database\Seeders;
 
-use App\Models\Club;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\Club;
+use App\Models\League;
 use Carbon\Carbon;
 
 /*
@@ -20,7 +20,7 @@ class ClubSeeder extends Seeder
 
         $currentTimestamp = Carbon::now();
 
-        Club::insert([
+        $clubs = [
             [
                 'name' => 'Arsenal',
                 'position' => 2,
@@ -56,6 +56,15 @@ class ClubSeeder extends Seeder
                 'image' => 'barcelona.jpg'
             ],
 
-        ]);
+        ];
+
+        foreach ($clubs as $clubData)
+        {
+            $club = Club::create(array_merge($clubData, ['created_at' => $currentTimestamp, ]));
+
+            $leagues = League::inRandomOrder()->take(2)->pluck('id');
+
+            $club->leagues()->attach($leagues);
+        }
     }
 }
