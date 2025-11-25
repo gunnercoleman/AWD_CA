@@ -23,7 +23,7 @@ class ClubSeeder extends Seeder
         $clubs = [
             [
                 'name' => 'Arsenal',
-                'position' => 2,
+                'position' => 1,
                 'description' => 'Best club in London',
                 'image' => 'arsenal.jpg'
             ],
@@ -38,14 +38,14 @@ class ClubSeeder extends Seeder
             [
                 'name' => 'Inter Milan',
                 'position' => 3,
-                'description' => 'Mid club in Italy',
+                'description' => 'Best club in Italy',
                 'image' => 'intermilan.jpg'
             ],
 
             [
                 'name' => 'Tottenham',
-                'position' => 16,
-                'description' => 'Below average team in London',
+                'position' => 9,
+                'description' => 'Shit team in London',
                 'image' => 'tottenham.jpg'
             ],
 
@@ -55,6 +55,64 @@ class ClubSeeder extends Seeder
                 'description' => 'Best club in Spain',
                 'image' => 'barcelona.jpg'
             ],
+
+            [
+                'name' => 'Liverpool',
+                'position' => 12,
+                'description' => 'Overrated club in England',
+                'image' => 'liverpool.jpg'
+            ],
+
+            [
+                'name' => 'Manchester United',
+                'position' => 10,
+                'description' => 'Most hated club in England',
+                'image' => 'manchesterunited.jpg'
+            ],
+
+            [
+                'name' => 'Real Madrid',
+                'position' => 1,
+                'description' => 'Most hated club in Spain',
+                'image' => 'realmadrid.jpg'
+            ],
+
+            [
+                'name' => 'Atletico Madrid',
+                'position' => 4,
+                'description' => 'Underrated club in Spain',
+                'image' => 'atleticomadrid.jpg'
+            ],
+
+            [
+                'name' => 'Bayer Leverkusen',
+                'position' => 3,
+                'description' => 'Underrated club in Germany',
+                'image' => 'bayerleverkusen.jpg'
+            ],
+
+            [
+                'name' => 'Dortmund',
+                'position' => 4,
+                'description' => 'Popular club in Germany',
+                'image' => 'dortmund.jpg'
+            ],
+
+            [
+                'name' => 'Napoli',
+                'position' => 3,
+                'description' => 'Underrated club in Italy',
+                'image' => 'napoli.jpg'
+            ],
+
+            [
+                'name' => 'AC Milan',
+                'position' => 2,
+                'description' => 'Most historic club in Italy',
+                'image' => 'acmilan.jpg'
+            ],
+
+
 
         ];
 

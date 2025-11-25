@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\League;
+use App\Models\Club;
 use Illuminate\Http\Request;
 
 class LeagueController extends Controller
@@ -12,7 +13,8 @@ class LeagueController extends Controller
      */
     public function index()
     {
-        //
+        $leagues = League::with('clubs')->get();
+        return view('leagues.index', compact('leagues'));
     }
 
     /**
@@ -20,7 +22,12 @@ class LeagueController extends Controller
      */
     public function create()
     {
-        //
+        if(auth()->user()->role !== 'admin'){
+            return redirect()->route('leagues.index')->with('error', 'Access Denied!');
+        }
+
+        $clubs = Club::all();
+        return view('leagues.create', compact('clubs'));
     }
 
     /**
@@ -28,7 +35,35 @@ class LeagueController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if(auth()->user()->role !== 'admin'){
+            return redirect()->route('leagues.index')->with('error', 'Access Denied !');
+        }
+
+        $validated = $request->validate([
+            'name' => 'required',
+            'description' => 'required|max:500',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'clubs' => 'array', 
+        ]);
+
+        if($request->hasFile('image')){
+
+           $imageName = time().'.'.$request->image->extension();
+
+           $request->image->move(public_path('images/leagues'), $imageName);
+
+           $validated['image'] = $imageName;
+        }
+
+        $league = League::create($validated);
+
+        if ($request->has('clubs')){
+
+            $league->clubs()->attach($request->clubs);
+
+        }
+
+        return redirect()->route('leagues.index')->with('success', 'League created successfully !');
     }
 
     /**
@@ -36,7 +71,8 @@ class LeagueController extends Controller
      */
     public function show(League $league)
     {
-        //
+        $league->load('clubs');
+        return view('leagues.show', compact('league'));
     }
 
     /**
@@ -44,15 +80,29 @@ class LeagueController extends Controller
      */
     public function edit(League $league)
     {
-        //
+        $clubs = Club::all();
+        $leagueClubs = $league->clubs->pluck('id')->toArray();
+        return view('leagues.edit', compact('league', 'clubs', 'leagueClubs'));
     }
 
     /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, League $league)
-    {
-        //
+    {   
+         $validated = $request->validate([
+            'name' => 'required',
+            'description' => 'required|max:500',
+            'clubs' => 'array', 
+        ]);
+
+        $league->update($validated);
+
+        if ($request->has('clubs')){
+            $league->clubs()->sync($request->clubs);
+        }
+
+        return redirect()->route('leagues.index')->with('success','League updated successfully !');
     }
 
     /**
@@ -60,6 +110,12 @@ class LeagueController extends Controller
      */
     public function destroy(League $league)
     {
-        //
+
+        $league->clubs()->detach();
+
+        $league->delete();
+
+        return redirect()->route('leagues.index')->with('success','League deleted successfully !');
+
     }
 }

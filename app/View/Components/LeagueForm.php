@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class league-card extends Component
+class LeagueForm extends Component
 {
     /**
      * Create a new component instance.
@@ -21,6 +21,6 @@ class league-card extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.league-card');
+        return view('components.league-form');
     }
 }

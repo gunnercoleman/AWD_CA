@@ -106,7 +106,6 @@ class ClubController extends Controller
             'name' => 'required',
             'position' => 'required|integer',
             'description' => 'required|max:500',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
         $data = $request->only(['name', 'position', 'description']);

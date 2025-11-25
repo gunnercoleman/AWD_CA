@@ -21,6 +21,25 @@
                             :position="$club->position"
                         />
                     </a>
+
+                    <div class="border flex space-x-2 rounded-lg shadow-md p-6 bg-white hover:shadow-lg transition duration-300 max-w-xl mx-auto">
+                        
+                        <a href="{{ route('clubs.edit', $club)}}" class="text-gray-600 bg-gray-300 hover:bg-red-700 font-bold py-2 px-4 rounded">
+                            Edit
+                        </a>
+
+                        <form action="{{ route('clubs.destroy', $club) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this club?');">
+                            
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="text-gray-600 bg-red-300 hover:bg-red-700 font-bold py-2 px-4 rounded">
+                                Delete
+                            </button>
+                        </form>
+
+                    </div>
+
+                    
                 <!--
                 This is the part in the view where we display the all players with the associated club.
 
@@ -110,22 +129,6 @@
                         </button>
                     </form>
 
-
-
-                    <div class="mt-4 flex space-x-2">
-
-                        <a href="{{ route('clubs.edit', $club)}}" class="text-gray-600 bg-orange-300 hover:bg-orange-700 font-bold py-2 px-4 rounded">
-                            Edit
-                        </a>
-
-                        <form action="{{ route('clubs.destroy', $club) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this club?');">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="text-gray-600 bg-red-300 hover:bg-red-700 font-bold py-2 px-4 rounded">
-                                Delete
-                            </button>
-                        </form>
-                    </div>
 
                 @endif
                 
