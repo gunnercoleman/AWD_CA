@@ -24,10 +24,14 @@ class Club extends Model
         'updated_at'
     ];
 
+    /* This establishes a one to many relationship with the player model. A club can have many players */
+
     public function players()
     {
         return $this->hasMany(Player::class);
     }
+
+    /* This establishes a many to many relationship with the league model. A club can compete in multiple leagues, and a league can contain multiple clubs */
 
     public function leagues()
     {

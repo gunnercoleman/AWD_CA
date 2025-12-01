@@ -20,6 +20,8 @@ class Player extends Model
         'club_id',
     ];
 
+    /* Vice versa, this establishes the relationship to the Club Model. Each player belongs to a single club. */
+
     public function club()
     {
         return $this->belongsTo(Club::class);

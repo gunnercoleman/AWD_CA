@@ -23,7 +23,7 @@ It acts as a bridge between the views and database
 class ClubController extends Controller
 {
     /*
-    This function returns a view of all clubs being displayed. With all clubs being retrieved from the database and fed into it as a paramiter
+    This function returns a view of all clubs within the database. With all clubs being retrieved from the Model which was imported at the top of the page, and then fed into the view as a paramiter.
     */
 
     public function index()
@@ -33,7 +33,7 @@ class ClubController extends Controller
     }
 
     /*
-    This function returns a view of a form which allows the user to input info and create a club if admin.
+    If the user is authinticated as a admin, this function returns a view of a form which allows the user to input data, and then create a new club.
     */
 
     public function create()
@@ -45,7 +45,7 @@ class ClubController extends Controller
     }
 
     /*
-    This function validates the forms information and saves a new club to the database, redirecting the user to the index displaying a success message.
+    This function first validates the data inserted into the form, and then saves a new club to the database, redirecting the user to the index displaying a success message along with the newly created club.
     */
 
     public function store(Request $request)
@@ -76,12 +76,13 @@ class ClubController extends Controller
     }
 
     /*
-    The show method returns a view of the single club card displaying information with club information being passed into it
+    The show method returns a view of the single club card displaying information with a single club paramiter being passed into it.
     */
 
     public function show(Club $club)
     {
-        //This makes all players associated with the club accessible in the show view
+    
+        //This makes all players associated with the club accessible in the show view, due to the players function coded in the club model, estab;ishing a relationship between the two Models.
 
         $club->load('players');
         return view('clubs.show')->with('club', $club);
@@ -126,7 +127,7 @@ class ClubController extends Controller
     }
 
     /*
-    The destroy method first deletes the clubs image and and rest of information from the database and redicts to the view all page.
+    The destroy method first deletes the clubs image and and rest of information from the database and redicts to the view all page, displaying a success message when successfull.
     */
     
     public function destroy(Club $club)

@@ -6,11 +6,25 @@ use App\Models\League;
 use App\Models\Club;
 use Illuminate\Http\Request;
 
+/**Here is my LeagueController
+
+I created it with,
+
+php artisan make:controller LeagueController --resource
+
+Similiar to ClubController, the role of LeagueController is to handle CRUD functionality for the League resource
+
+It allows for communication between the views and the League Model (database) 
+
+**/
+
 class LeagueController extends Controller
 {
+    
     /**
      * Display a listing of the resource.
      */
+
     public function index()
     {
         $leagues = League::with('clubs')->get();
